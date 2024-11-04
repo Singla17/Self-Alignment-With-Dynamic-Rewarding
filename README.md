@@ -2,7 +2,7 @@
 
 ## Setup 
 
-To setup the environment you may use any of the following two ways:
+To setup the environment, you may use any of the following two ways (We use python 3.10):
 1. `conda env create -f environment/conda_environment.yml`
 2. `pip install -r environment/requirements.txt`
 

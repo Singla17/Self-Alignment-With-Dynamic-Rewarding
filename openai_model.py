@@ -20,11 +20,7 @@ class OpenAIChatModel(Model):
         self.client = openai.OpenAI(
             timeout=timeout,
         )
-    
-    @staticmethod
-    def load():
-        pass
-
+        
     def generate(self, 
                  user_prompt: Optional[str] = None,
                  system_prompt: Optional[str] = None,
