@@ -46,8 +46,11 @@ class AutoModel(Model):
         """
         Helper to load json.
         """
-        with open(file_path, 'r') as f:
-            return json.load(f)
+        try:
+            with open(file_path, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            return {}
 
     def _compute_icl_query_embeddings(self) -> dict:
         """
@@ -78,15 +81,15 @@ class AutoModel(Model):
             print(f"We currently do not have optimized prompt for: {self.model.model_name}.")
             return "You are a helpful assistant"
         
-        prompt_path = self.model_mapping(self.model.model_name)
+        prompt_path = self.model_mapping[self.model.model_name]
 
         with open(prompt_path, 'rb') as f:
-            prompt_file =pickle.load(f)
+            prompt_obj =pickle.load(f)
 
         try:
-            model_prompt = prompt_file.terminal_node.state[-1].system_prompt
+            model_prompt = prompt_obj.terminal_node.state[-1].system_prompt
         except:
-            model_prompt = prompt_file
+            model_prompt = prompt_obj
 
         return model_prompt
 
@@ -167,7 +170,7 @@ class AutoModel(Model):
                 stream=False, **kwargs
             )
         else:
-            if self.model.tokenizer.chat_tempalte is not None:
+            if self.model.tokenizer.chat_template is not None:
                 prompt = self._prepare_chat_llm_prompt(system_prompt, user_prompt)
             else:
                 prompt = system_prompt + "\n\n" + user_prompt
