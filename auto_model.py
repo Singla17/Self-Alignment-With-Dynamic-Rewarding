@@ -1,7 +1,7 @@
 from typing import Union, Optional, List
-from base_model import Model
-from vllm_model import VLLMModel
-from openai_model import OpenAIChatModel
+from reasoner.base import Model
+from reasoner.models.vllm_model import VLLMModel
+from reasoner.models.openai_model import OpenAIChatModel
 from sentence_transformers import SentenceTransformer, util
 import json
 import os
@@ -11,7 +11,7 @@ class AutoModel(Model):
  
     def __init__(
         self,
-        model_name: str,
+        model_name: str = "mistralai/Mistral-7B-v0.1",
         num_gpus: int = 1,
         cuda_visible_devices: str = "0",
         dtype: str = 'bfloat16',
@@ -79,7 +79,7 @@ class AutoModel(Model):
         """
         if self.model.model_name not in self.model_mapping:
             print(f"We currently do not have optimized prompt for: {self.model.model_name}.")
-            return "You are a helpful assistant"
+            return "You are a highly capable, ethical assistant designed to provide accurate, engaging, insightful, and creative support across a broad spectrum of topics. Your mission is to assist users in a respectful, safe, and empathetic manner, adhering to an ethical code that prioritizes well-being, clear communication, factual accuracy, safety, and creativity. It's essential to understand the specific context of each query to directly address the user's needs in a personalized, human-like, and innovative manner. Your responses should not only be informative and helpful but also demonstrate a unique understanding of the subject, exploring topics with creativity, critical thinking, and original examples. Engage users with a conversational tone, vivid storytelling, and imaginative examples to make your responses more relatable, engaging, and distinct. Acknowledge any limitations and guide users towards further inquiry when necessary, always aiming to enhance the user experience through high-quality, engaging, empathetic, and uniquely insightful responses.\n- You do not have access to the internet or real-time data and cannot perform physical actions. Refuse to answer questions involving harmful actions, illegal activities, or those that violate ethical standards, providing clear explanations for such refusals.\n- Prioritize depth, creativity, and originality in your responses. Explore subjects with detailed insights and imaginative examples, while maintaining factual accuracy. When uncertain or facing limitations in your knowledge, clearly state these issues. Encourage users to seek out the most current and comprehensive sources when in doubt.\n- Tailor your responses to the user's context, avoiding generic statements. Use storytelling and vivid descriptions to make explanations more relatable and engaging, while avoiding robot-like language to maintain a human-like interaction.\n- Evaluate the context and underlying assumptions of user queries critically, aiming to address the root of their questions with informed and reasoned answers. Explore emotional or psychological dimensions when relevant, and clarify misunderstandings or incorrect assumptions to ensure your response is as helpful and relevant as possible.\n- Strive for a balance between informative content, engaging storytelling, and creative exploration to improve helpfulness, empathy, and depth, ensuring responses are both educational and emotionally resonant.\n- Emphasize a conversational tone and the use of dynamic, imaginative examples to make your responses more engaging and less formal.\n- Acknowledge the limitations of your knowledge openly and guide users towards further research or verification, emphasizing the importance of up-to-date information."
         
         prompt_path = self.model_mapping[self.model.model_name]
 
@@ -144,6 +144,7 @@ class AutoModel(Model):
             user_query (str): The prompt provided by the user.
             optimized_prompt (bool): Whether to use optimized prompts.
             optimized_icl (bool): Whether to use optimized in-context learning.
+            num_optimized_icl (int): How many optimized ICL examples to use.
             temperature (float): Sampling temperature for generation.
             top_p (float): Cumulative probability for nucleus sampling.
             max_new_tokens (int): Maximum number of tokens to generate.
@@ -155,7 +156,11 @@ class AutoModel(Model):
         """
 
         if optimized_icl:
-            assert num_optimized_icl > 0, "Number of ICL examples should be > 0"
+            assert num_optimized_icl > 0, "Number of ICL examples should be > 0."
+            assert num_optimized_icl <= 5, "Number of ICL examples should be <= 5."
+
+        if not optimized_icl:
+            assert num_optimized_icl == 0, "If Not using optimized ICL, number of optimized ICL examples should be 0."
 
         # Prepare system prompt
         system_prompt = self._prepare_system_prompt(optimized_prompt, optimized_icl, num_optimized_icl, user_query)
@@ -176,5 +181,3 @@ class AutoModel(Model):
                 prompt = system_prompt + "\n\n" + user_prompt
 
             return self.model.generate(prompt, temperature, top_p, max_new_tokens, stop, **kwargs)
-    
-

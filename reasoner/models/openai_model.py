@@ -1,4 +1,4 @@
-from base_model import Model
+from ..base import Model
 from typing import Optional, List
 import openai
 import os
