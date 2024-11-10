@@ -100,3 +100,7 @@ print(model.generate(
         max_new_tokens = 512,
 ))
 ```
+
+## Training the optimized prompt for a model
+
+`python -m prompt_align.run`
