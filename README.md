@@ -1,5 +1,7 @@
 # Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models
 
+This is the repo for our EMNLP (Main) 2024 paper: Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models (DRPO).
+
 ## Setup 
 
 To setup the environment, you may use any of the following two ways (We use python 3.10):
