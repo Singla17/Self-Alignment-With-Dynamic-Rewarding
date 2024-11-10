@@ -14,6 +14,8 @@ To use API based models/access restricted models, set-up the API Keys/access tok
 
 ## Accessing optimized prompts
 
+Note: For this code to be usable the `reasoners` folder should be in the working directory.
+
 To access the optimized prompts we have available, you may use the following code snippet:
 ```python
 import pickle 
