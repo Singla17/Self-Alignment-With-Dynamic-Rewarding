@@ -64,7 +64,7 @@ class PromptAlignWorldModel(WorldModel[PromptAlignState, PromptAlignAction, Prom
             self.embedding_model = SentenceTransformer("all-mpnet-base-v2")
 
             # Loading the examples file
-            with open('./data/ICL_optimization/out_16_5.json', 'r') as f:
+            with open('./data/ICL_examples.json', 'r') as f:
                 self.icl_examples = json.load(f)
 
             # Query embeddings for similarity search

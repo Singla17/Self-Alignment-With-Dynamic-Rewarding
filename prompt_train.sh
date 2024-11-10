@@ -1,0 +1,11 @@
+python -m prompt_align.run \
+    --base_model_name=mistralai/Mistral-7B-Instruct-v0.1 \
+    --base_model_family=mistral \
+    --eval_model_name=gpt-4-0125-preview\
+    --metrics_model_name=gpt-4-0125-preview\
+    --optimize_model_name=gpt-4-0125-preview\
+    --initial_system_prompt="You are a helpful assistant."\
+    --n_actions=3\
+    --temperature=0.2\
+    --beam_size=2\
+    --log_dir=logs/mistral_7b

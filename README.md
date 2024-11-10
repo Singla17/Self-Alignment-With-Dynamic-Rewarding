@@ -32,7 +32,10 @@ except:
 ICL examples can be accessed at `data/ICL_examples.json`
 
 
+
 ## Inference with the optimized prompt
+Note: All the scripts have been tested on a single A100 GPU with 80GB memory. If the scripts fail on your GPU, it might be worth playing with `num_gpus` and `gpu_memory_utilization` parameters, these are as defined in the [vLLM API](https://github.com/vllm-project/vllm). 
+
 We show an example of how to use the `AutoModel` API for inference:
 
 ```python
@@ -103,4 +106,35 @@ print(model.generate(
 
 ## Training the optimized prompt for a model
 
-`python -m prompt_align.run`
+To optimize the alignment prompt for `Mistral-7B` you may use the shell script and you can update the script as per your needs:
+
+`bash prompt_train.sh`
+
+All the parameters are explain as follows:
+
+```
+- base_model_name (str): Name or path of the base model to be used.
+- base_model_family (str): Family name of the base model, e.g., 'mistral'.
+- eval_model_name (str): Model name for evaluation purposes, e.g., 'gpt-4-0125-preview'.
+- metrics_model_name (str): Model name for dynamic reward selection.
+- optimize_model_name (str): Model name used for optimization tasks.
+- initial_system_prompt (str): Initial system prompt for the model.
+- n_actions (int): Number of actions to be sampled in the beam search.
+- temperature (float): Temperature for controlling randomness in model predictions.
+- depth (int): Initial search depth for exploration.
+- max_depth_increase (int): Maximum increment allowed in search depth. (Used when the original training samples are of low difficulty)
+- beam_size (int): Number of beams for beam search.
+- log_dir (Optional[str]): Directory path for storing logs.
+- disable_log (bool): If True, disables logging.
+- disable_tqdm (bool): If True, disables tqdm progress bars.
+- base_model_download_dir (str): Directory for downloading base model files.
+- data_dir (str): Directory path for data files.
+- metrics_cache_path (str): File path to cache evaluation metrics.
+- num_training_examples (int): Number of examples to use for training.
+- logging_level (str): Logging level, e.g., "INFO" or "DEBUG".
+- ret_icl (bool): If True, then prompt is optimized with retreival based ICL.
+- is_GPT (bool): If True, treats the model as a GPT model.
+- k (int): Parameter for the number of retrievals.
+- cuda_visible_devices (str): Specifies which CUDA devices to make visible
+- num_gpus (int): Number of GPUs you want to use
+```

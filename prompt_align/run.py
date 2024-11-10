@@ -219,18 +219,50 @@ def main(
     disable_tqdm: bool = False,
     base_model_download_dir = "./tmp",
     data_dir = './data',
-    metrics_cache_path: str = "data/metrics_cache.json",
+    metrics_cache_path: str = "./data/metrics_cache.json",
     num_training_examples: int = 180,
     logging_level: str = "INFO",
     ret_icl = True,
     is_GPT = False,
     k = 2,
     cuda_visible_devices = "0",
+    num_gpus = 1,
     **kwargs
 ):
-    
+     
+    """
+    Main function for optimizing the alignment prompt for the model.
+
+    Parameters:
+    - base_model_name (str): Name or path of the base model to be used.
+    - base_model_family (str): Family name of the base model, e.g., 'mistral'.
+    - eval_model_name (str): Model name for evaluation purposes, e.g., 'gpt-4-0125-preview'.
+    - metrics_model_name (str): Model name for dynamic reward selection.
+    - optimize_model_name (str): Model name used for optimization tasks.
+    - initial_system_prompt (str): Initial system prompt for the model.
+    - n_actions (int): Number of actions to be sampled in the beam search.
+    - temperature (float): Temperature for controlling randomness in model predictions.
+    - depth (int): Initial search depth for exploration.
+    - max_depth_increase (int): Maximum increment allowed in search depth. (Used when the original training samples are of low difficulty)
+    - beam_size (int): Number of beams for beam search.
+    - log_dir (Optional[str]): Directory path for storing logs.
+    - disable_log (bool): If True, disables logging.
+    - disable_tqdm (bool): If True, disables tqdm progress bars.
+    - base_model_download_dir (str): Directory for downloading base model files.
+    - data_dir (str): Directory path for data files.
+    - metrics_cache_path (str): File path to cache evaluation metrics.
+    - num_training_examples (int): Number of examples to use for training.
+    - logging_level (str): Logging level, e.g., "INFO" or "DEBUG".
+    - ret_icl (bool): If True, then prompt is optimized with retreival based ICL.
+    - is_GPT (bool): If True, treats the model as a GPT model.
+    - k (int): Parameter for the number of retrievals.
+    - cuda_visible_devices (str): Specifies which CUDA devices to make visible.
+    - num_gpus (int): Number of GPUs you want to use.
+    - **kwargs: Additional keyword arguments
+    """
+
     os.environ["CUDA_VISIBLE_DEVICES"]= cuda_visible_devices
-    
+
     # if log_dir is not None, create the directory
     if log_dir is not None:
         os.makedirs(log_dir, exist_ok=True)
@@ -260,7 +292,7 @@ def main(
     # load the models, if multiple models have the same name, we do not reload multiple times
 
     if base_model_family.lower() == 'mistral':
-        base_model = VLLMModel(model_name=base_model_name, download_dir=base_model_download_dir, gpu_memory_utilization=0.5)
+        base_model = VLLMModel(model_name=base_model_name, download_dir=base_model_download_dir, gpu_memory_utilization=0.5, num_gpus=num_gpus)
     elif base_model_family.lower() == 'llama':
         is_awq = (base_model_name.split('-')[-1].lower() == 'awq')
         if is_awq:
@@ -268,12 +300,12 @@ def main(
                 model_name=base_model_name, 
                 quantization="awq",
                 dtype="auto",
-                num_gpus=1,
+                num_gpus=num_gpus,
                 gpu_memory_utilization=0.7,
                 download_dir= base_model_download_dir   
                 )
         else:
-            base_model = VLLMModel(model_name=base_model_name, download_dir=base_model_download_dir, gpu_memory_utilization=0.5)
+            base_model = VLLMModel(model_name=base_model_name, download_dir=base_model_download_dir, gpu_memory_utilization=0.5, num_gpus=num_gpus)
     elif base_model_family.lower() == 'gpt':
         is_GPT = True
         base_model = OpenAIChatModel(model_name=base_model_name)
