@@ -1,12 +1,12 @@
 {
-    "gpt-3.5-turbo" : "gpt-3.5-turbo",
-    "gpt-3.5-turbo-0125" : "gpt-3.5-turbo",
-    "meta-llama/Llama-2-7b-hf": "llama 2-7b",
-    "meta-llama/Llama-2-7b-chat-hf": "llama2-7b-chat-hf",
-    "TheBloke/Llama-2-70B-AWQ": "llama2-70b",
-    "TheBloke/Llama-2-70B-Chat-AWQ": "llama2-70b-chat",
-    "meta-llama/Meta-Llama-3-8B": "llama3-8b",
-    "meta-llama/Meta-Llama-3-8B-Instruct": "llama3-8b-instruct",
-    "mistralai/Mistral-7B-v0.1": "mistral-7b-v0.1",
-    "mistralai/Mistral-7B-Instruct-v0.1": "mistral-7b-instruct-v0.1"
+    "gpt-3.5-turbo" : "./data/gpt-3.5-turbo/output.pkl",
+    "gpt-3.5-turbo-0125" : "./data/gpt-3.5-turbo/output.pkl",
+    "meta-llama/Llama-2-7b-hf": "./data/llama 2-7b/output.pkl",
+    "meta-llama/Llama-2-7b-chat-hf": "./data/llama2-7b-chat-hf/output.pkl",
+    "TheBloke/Llama-2-70B-AWQ": "./data/llama2-70b/output.pkl",
+    "TheBloke/Llama-2-70B-Chat-AWQ": "./data/llama2-70b-chat/output.pkl",
+    "meta-llama/Meta-Llama-3-8B": "./data/llama3-8b/output.pkl",
+    "meta-llama/Meta-Llama-3-8B-Instruct": "./data/llama3-8b-instruct/output.pkl",
+    "mistralai/Mistral-7B-v0.1": "./data/mistral-7b-v0.1/output.pkl",
+    "mistralai/Mistral-7B-Instruct-v0.1": "./data/mistral-7b-instruct-v0.1/output.pkl"
 }

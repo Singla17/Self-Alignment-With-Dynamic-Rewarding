@@ -21,9 +21,6 @@ from .search_config import PromptAlignSearchConfig
 
 from .utils import parse_algo_output
 
-#TODO: update GPU numbers if running out of CUDA memory.
-os.environ["CUDA_VISIBLE_DEVICES"]= "5"
-
 def interleave_data_arrays(alpaca_data, lima_data, mal_data):
     total_data = len(lima_data) + len(mal_data) + len(alpaca_data)
 
@@ -228,8 +225,12 @@ def main(
     ret_icl = True,
     is_GPT = False,
     k = 2,
+    cuda_visible_devices = "0",
     **kwargs
 ):
+    
+    os.environ["CUDA_VISIBLE_DEVICES"]= cuda_visible_devices
+    
     # if log_dir is not None, create the directory
     if log_dir is not None:
         os.makedirs(log_dir, exist_ok=True)
