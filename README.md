@@ -140,3 +140,30 @@ All the parameters are explain as follows:
 - cuda_visible_devices (str): Specifies which CUDA devices to make visible
 - num_gpus (int): Number of GPUs you want to use
 ```
+
+## Citations
+
+If you find the paper and code useful, please kindly star this repo and cite the following paper. Feel free to contact ssingla@ucsd.edu and zhenwang9102@gmail.com, or open an issue if you have any questions. Thanks so much!
+
+```
+@inproceedings{singla-etal-2024-dynamic,
+    title = "Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models",
+    author = "Singla, Somanshu  and
+      Wang, Zhen  and
+      Liu, Tianyang  and
+      Ashfaq, Abdullah  and
+      Hu, Zhiting  and
+      Xing, Eric P.",
+    editor = "Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung",
+    booktitle = "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.emnlp-main.1220",
+    pages = "21889--21909",
+    abstract = "Aligning Large Language Models (LLMs) traditionally relies on complex and costly training processes like supervised fine-tuning (SFT) and reinforcement learning from human feedback (RLHF). To address the challenge of achieving alignment without these extensive tuning costs and expensive annotations, we present a novel, tuning-free approach for self-alignment called Dynamic Rewarding with Prompt Optimization (DRPO). Our approach enables self-alignment through a search-based prompt optimization framework, allowing the model to self-improve and generate optimized prompts without additional training or human supervision. The core of DRPO leverages a dynamic rewarding mechanism to identify and rectify model-specific alignment weaknesses, enabling LLMs to adapt quickly to various alignment challenges. Empirical evaluations on eight recent LLMs, including both open- and closed-source, reveal that DRPO significantly enhances alignment performance, enabling base models to outperform their SFT/RLHF-tuned counterparts. Moreover, DRPO{'}s automatically optimized prompts surpass those curated by human experts, demonstrating its superior alignment capabilities. Our findings envision a highly cost-effective and adaptable solution for future alignment research to be further explored.",
+}
+```
