@@ -85,7 +85,7 @@ print(model.generate(
 ```
 
 
-If you want to use the API for an Open-AI model: 
+If you want to use the API for an OpenAI model: 
 
 ```python
 from auto_model import AutoModel
