@@ -70,19 +70,23 @@ We show an example of how to use the `AutoModel` API for inference:
 
 The Key parameters for model initalization are explained as follows:
 
-1. model_name (str): The model name (as seen on HuggingFace) you want to use.
-2. num_gpus (int): Number of GPUs you want to use for inference.
-3. cuda_visible_devices (str): IDs of the GPUs you want to use.
-4. gpu_memory_utilization (float): Maximum cap on GPU memory utilization of each individual GPU.
-4. dtype (str): Data type of model parameters.
+```
+- model_name (str): The model name (as seen on HuggingFace) you want to use.
+- num_gpus (int): Number of GPUs you want to use for inference.
+- cuda_visible_devices (str): IDs of the GPUs you want to use.
+- gpu_memory_utilization (float): Maximum cap on GPU memory utilization of each individual GPU.
+- dtype (str): Data type of model parameters.
+```
 
 You can generate model response using the `generate` function and the key parameters are defined as follows:
 
-1. user_query (str): The Query you want the model to respond to.
-2. user_specified_system_prompt (str): If you want to test the model with a custom system prompt (using this means alignment optimized prompts won't be used)
-3. optimized_prompt (bool): Boolean indicating if you want to use model specific optimized alignment prompt.
-4. optimized_icl (bool): Boolean indicating if you want to use ICL examples optimized for alignment/
-5. num_optimized_icl (int): Number of alignment ICL examples you want to use (can be an integer in [1, 5])
+```
+- user_query (str): The Query you want the model to respond to.
+- user_specified_system_prompt (str): If you want to test the model with a custom system prompt (using this means alignment optimized prompts won't be used)
+- optimized_prompt (bool): Boolean indicating if you want to use model specific optimized alignment prompt.
+- optimized_icl (bool): Boolean indicating if you want to use ICL examples optimized for alignment/
+- num_optimized_icl (int): Number of alignment ICL examples you want to use (can be an integer in [1, 5])
+```
 
 ```python
 from auto_model import AutoModel
