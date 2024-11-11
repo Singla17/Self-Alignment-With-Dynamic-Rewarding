@@ -189,6 +189,8 @@ print(model.generate(
 ))
 ```
 
+### Model response improvement with DRPO
+
 You can see an example of how using our optimized alignment instructions can change model response:
 
 <details>
