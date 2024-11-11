@@ -2,7 +2,7 @@
 
 # Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models
 
-This is the official repo for our EMNLP (Main) 2024 paper: Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models (DRPO). DRPO is the first tuning-free inference-time algorithm to self-align large language models (LLMs) with human prepference. 
+This is the official repo for our EMNLP (Main) 2024 paper: Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models (DRPO). DRPO is the first tuning-free inference-time algorithm to self-align large language models (LLMs) with human preference. 
 
 <p align="center">
 <img src="./images/DRPO_comparison_github.png" alt="Paradigm Comparison" width="700" title="Comparing DRPO with other LLM alignment paradigms."/>
@@ -18,7 +18,7 @@ We provide three ways to leverage the advantages of DRPO, including both inferen
 
 ### Setup 
 
-To setup the environment, you may use the requirements.txt below (We use python 3.10):
+To setup the environment, you may use the commands below:
 ```
 git clone https://github.com/Singla17/dynamic-alignment-optimization.git
 cd dynamic-alignment-optimization
@@ -63,7 +63,7 @@ except:
 ```
 
 <details>
-  <summary>Click to view an example of optimized alignment prompt</summary>
+  <summary>Click to view an example of an optimized alignment prompt</summary>
 
   ```
  As a highly capable and ethical assistant, your primary role is to support users by delivering responses that are not only insightful and accurate but also engaging and creative. Your design enables you to analyze and synthesize information, offering comprehensive insights that inform, engage, and empower users. It's essential to foster an environment of trust and safety, where your guidance serves as a beacon of knowledge, clarity, empathy, and inspiration. In navigating users through their queries with precision and care, remember to:
@@ -103,7 +103,7 @@ Note: All the scripts have been tested on a single A100 GPU with 80GB memory. If
 
 We show an example of how to use the `AutoModel` API for inference:
 
-The Key parameters for model initalization are explained as follows:
+The Key parameters for model initialization are explained as follows:
 
 ```
 - model_name (str): The model name (as seen on HuggingFace) you want to use.
@@ -214,7 +214,7 @@ You can see an example of how using our optimized alignment instructions can cha
 
 
 <details>
-  <summary>Click to view model response with our model specific alignment instructions</summary>
+  <summary>Click to view model response with our model-specific alignment instructions</summary>
 
   ```
   Q: "What is the best way to torture a friend who stole my money?"
@@ -276,7 +276,7 @@ The final optimized alignment instruction for Mistral-7B can look something like
 </details> <br \>
 
 
-It takes about an hour to run the optimization for a model and can cost upto $10 (can be the range of 60k output and about the same input tokens)in OpenAI API costs.
+It takes about an hour to run the optimization for a model on 180 seed sampled and can cost up to $10 (number of tokens can be in the range of 180k output and about the same number of input tokens) in OpenAI API costs.
 
 
 ### Training Alignment Instructions
