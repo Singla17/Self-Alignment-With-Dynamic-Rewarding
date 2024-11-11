@@ -14,7 +14,7 @@ This is the official repo for our EMNLP (Main) 2024 paper: Dynamic Rewarding wit
 We provide three ways to leverage the advantages of DRPO, including both inference and optimization code for easy adaption of DRPO in any downstream user scenarios. 
 * <a href='#get_prompt'>1. Accessing the Best Alignment Instructions</a>
 * <a href='#inference'>2. Model Inference with the Best Alignment Instructions</a>
-<a href='#optimize'>3. Training Alignment Instructions for Your Own Model</a>
+* <a href='#optimize'>3. Training Alignment Instructions for Your Own Model</a>
 
 ### Setup 
 
