@@ -140,7 +140,7 @@ class AutoModel(Model):
         temperature: float = 0.7,
         top_p: float = 0.95,
         max_new_tokens: int = 512,
-        stop: Optional[Union[str, List[str]]] = None,
+        stop: Optional[Union[str, List[str]]] = ["<END>", "<END", "<|eot_id|>"],
         **kwargs
     ) -> str:
         """
