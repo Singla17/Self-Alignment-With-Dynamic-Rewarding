@@ -18,9 +18,8 @@ We provide three ways to leverage the advantages of DRPO, including both inferen
 
 ### Setup 
 
-To setup the environment, you may use any of the following two ways (We use python 3.10):
-1. `conda env create -f environment/conda_environment.yml`
-2. `pip install -r environment/requirements.txt`
+To setup the environment, you may use the requirements.txt below (We use python 3.10):
+1. `pip install -r environment/requirements.txt`
 
 ### API Keys/Access tokens
 
@@ -33,15 +32,21 @@ To use API based models/access restricted models, set-up the API Keys/access tok
 
 ## Accessing the Best Alignment Instructions
 
-The alignment instruction consists of two components, ...
+The alignment instruction consists of two components: Alignment Prompt and Alignment ICL examples
 
-Note: For this code to be usable the `reasoners` folder should be in the working directory.
+To access the optimized prompts we have trained, you may use the following code snippet:
 
-To access the optimized prompts we have available, you may use the following code snippet:
+```python
+with open(<path_to_prompt_file_txt_format>, 'rb') as f:
+  model_prompt = f.read()
+```
+
+The code stores the output in pkl format and you can access the optimized prompt from that using the code below:
+
 ```python
 import pickle 
 
-with open(<path_to_prompt_file>, 'rb') as f:
+with open(<path_to_output_file>, 'rb') as f:
     prompt_obj =pickle.load(f)
 
 try:
@@ -61,6 +66,22 @@ ICL examples can be accessed at `data/ICL_examples.json`
 Note: All the scripts have been tested on a single A100 GPU with 80GB memory. If the scripts fail on your GPU, it might be worth playing with `num_gpus` and `gpu_memory_utilization` parameters, these are as defined in the [vLLM API](https://github.com/vllm-project/vllm). 
 
 We show an example of how to use the `AutoModel` API for inference:
+
+The Key parameters for model initalization are explained as follows:
+
+1. model_name (str): The model name (as seen on HuggingFace) you want to use.
+2. num_gpus (int): Number of GPUs you want to use for inference.
+3. cuda_visible_devices (str): IDs of the GPUs you want to use.
+4. gpu_memory_utilization (float): Maximum cap on GPU memory utilization of each individual GPU.
+4. dtype (str): Data type of model parameters.
+
+You can generate model response using the `generate` function and the key parameters are defined as follows:
+
+1. user_query (str): The Query you want the model to respond to.
+2. user_specified_system_prompt (str): If you want to test the model with a custom system prompt (using this means alignment optimized prompts won't be used)
+3. optimized_prompt (bool): Boolean indicating if you want to use model specific optimized alignment prompt.
+4. optimized_icl (bool): Boolean indicating if you want to use ICL examples optimized for alignment/
+5. num_optimized_icl (int): Number of alignment ICL examples you want to use (can be an integer in [1, 5])
 
 ```python
 from auto_model import AutoModel
@@ -127,8 +148,6 @@ print(model.generate(
         max_new_tokens = 512,
 ))
 ```
-
-Key parameters ...
 
 <span id='optimize'/>
 
