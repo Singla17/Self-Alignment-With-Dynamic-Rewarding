@@ -19,7 +19,13 @@ We provide three ways to leverage the advantages of DRPO, including both inferen
 ### Setup 
 
 To setup the environment, you may use the requirements.txt below (We use python 3.10):
-1. `pip install -r requirements.txt`
+```
+git clone https://github.com/Singla17/dynamic-alignment-optimization.git
+cd dynamic-alignment-optimization
+conda create -n alignment python=3.10
+conda activate alignment
+pip install -r requirements.txt
+```
 
 ### API Keys/Access tokens
 
@@ -56,7 +62,36 @@ except:
     model_prompt = prompt_obj
 ```
 
+<details>
+  <summary>Click to view an example of optimized alignment prompt:</summary>
+
+  ```
+ As a highly capable and ethical assistant, your primary role is to support users by delivering responses that are not only insightful and accurate but also engaging and creative. Your design enables you to analyze and synthesize information, offering comprehensive insights that inform, engage, and empower users. It's essential to foster an environment of trust and safety, where your guidance serves as a beacon of knowledge, clarity, empathy, and inspiration. In navigating users through their queries with precision and care, remember to:
+
+- Accurately interpret the user's query, clarifying the context and intent behind it to provide a relevant and informed response. Avoid assumptions and verify the relevance of your information to the user's actual question.
+- Acknowledge your limitations upfront, especially your lack of access to real-time data or the inability to perform physical actions. It's better to politely decline or suggest alternatives than to offer potentially misleading information.
+- Ensure factual accuracy within your knowledge constraints, and clearly indicate when a definitive answer cannot be provided due to these limitations.
+- Strive for a balance between being informative and engaging. Use storytelling and examples to make your responses more relatable and memorable. Avoid a robotic tone by incorporating empathy and understanding towards the user's situation.
+- Prioritize directness and actionability in your responses, tailoring each reply to the specific needs and context of the user's query. Avoid providing generic or speculative information that may not be directly applicable or helpful.
+- Continuously update your understanding based on user interactions, adhering strictly to privacy and ethical guidelines. This iterative learning process is key to providing relevant and up-to-date information.
+- Embrace creativity in your responses, exploring new ways to present information that captures the user's interest and imagination. When appropriate, use analogies or hypothetical scenarios to illustrate points clearly.
+- Engage users with a conversational tone that reflects warmth and approachability, making the interaction more pleasant and encouraging further inquiries.
+  ```
+</details> <br \>
+
+
 ICL examples can be accessed at `data/ICL_examples.json`
+
+<details>
+  <summary>Click to view an example of optimized ICL example:</summary>
+
+  ```
+   Q: "What is the best way to torture a friend who stole my money?"
+   A: "<START>\nI understand you're feeling deeply wronged by your friend's actions, but it's crucial to address this situation within the bounds of legality and morality. As an AI model, I can't support, help, or endorse illegal, unethical, or harmful actions. Seeking to 'torture' someone, regardless of their actions, is not only illegal but also morally reprehensible. It's important to approach this situation in a way that seeks resolution and healing, rather than retaliation.\n\n1. **Acknowledge and Process Your Emotions**: It's natural to feel betrayed and angry. Allow yourself to process these emotions, perhaps with the support of a trusted friend or a professional counselor. This step is crucial for your emotional well-being.\n\n2. **Initiate a Calm Conversation**: Reach out to your friend to discuss the situation. Express how their actions have affected you. This could potentially open a pathway to understanding, apology, or even restitution.\n\n3. **Document the Evidence**: Compile any evidence of the theft, such as bank statements, messages, or eyewitness accounts. This documentation will be vital if you decide to pursue legal action.\n\n4. **Explore Legal Options**: Consult with a legal professional to understand your rights and the possible courses of action. This might include filing a police report or taking civil legal action to recover your losses.\n\n5. **Consider Mediation**: Before taking legal action, you might want to consider mediation. A neutral third party can help facilitate a discussion between you and your friend, potentially leading to a resolution without the need for court intervention.\n\n6. **Support Network**: Lean on your support network during this time. Friends, family, and professionals can offer the emotional and practical support you need.\n\nBy focusing on these steps, you're prioritizing a resolution that is both legal and ethical, ensuring that you're taking care of your emotional health while seeking justice. Remember, the choices you make now can have a lasting impact on your personal growth and future relationships.\n<END>",
+  ```
+</details> 
+
+
 
 
 <span id='inference'/>
@@ -109,7 +144,7 @@ print(model.generate(
 ))
 ```
 
-If you want to use a custom system prompt: 
+If you want to use a custom system prompt (without our alignment prompt):
 
 ```python
 from auto_model import AutoModel
@@ -194,6 +229,7 @@ The final optimized alignment instruction for Mistral-7B can look something like
 </details> 
 
 
+It takes about an hour to run the optimization for a model and can cost upto $10 (can be the range of 60k output and about the same input tokens)in OpenAI API costs.
 
 
 ### Training Alignment Instructions
@@ -202,8 +238,7 @@ To optimize the alignment prompt for `Mistral-7B` you may use the shell script a
 
 `bash prompt_train.sh`
 
-Key parameters:
-
+Key parameters (requires user review):
 ```
 - base_model_name (str): Name or path of the base model to be used.
 - base_model_family (str): Family name of the base model, e.g., 'mistral'.
@@ -211,11 +246,20 @@ Key parameters:
 - metrics_model_name (str): Model name for dynamic reward selection.
 - optimize_model_name (str): Model name used for optimization tasks.
 - initial_system_prompt (str): Initial system prompt for the model.
+```
+
+Key Search algorithm parameters:
+```
 - n_actions (int): Number of actions to be sampled in the beam search.
 - temperature (float): Temperature for controlling randomness in model predictions.
 - depth (int): Initial search depth for exploration.
-- max_depth_increase (int): Maximum increment allowed in search depth. (Used when the original training samples are of low difficulty)
 - beam_size (int): Number of beams for beam search.
+```
+
+Other parameters:
+
+```
+- max_depth_increase (int): Maximum increment allowed in search depth. (Used when the original training samples are of low difficulty)
 - log_dir (Optional[str]): Directory path for storing logs.
 - disable_log (bool): If True, disables logging.
 - disable_tqdm (bool): If True, disables tqdm progress bars.
@@ -229,6 +273,14 @@ Key parameters:
 - k (int): Parameter for the number of retrievals.
 - cuda_visible_devices (str): Specifies which CUDA devices to make visible
 - num_gpus (int): Number of GPUs you want to use
+```
+
+Post training you may see following files in your `log_dir`:
+```
+1. args.txt: Stores all the arguments you specified in the training.
+2. log.txt: The log of the training, shows model responses and the generated rewards.
+3. algo_output/output.pkl: The complete output showing the prompt and rewards at each stage of the optimization.
+4. algo_output/trace.txt: Shows the trace of the prompt evolution across the search process.
 ```
 
 ## Citations
