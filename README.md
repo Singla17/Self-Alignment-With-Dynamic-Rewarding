@@ -112,7 +112,7 @@ The Key parameters for model initialization are explained as follows:
 - dtype (str): Data type of model parameters.
 ```
 
-You can generate model response using the `generate` function and the key parameters are defined as follows:
+You can generate the model response using the `generate` function and the key parameters are defined as follows:
 
 ```
 - user_query (str): The Query you want the model to respond to.
@@ -124,7 +124,7 @@ You can generate model response using the `generate` function and the key parame
 
 ### Model response improvement with DRPO
 
-You can see an example of how using our optimized alignment instructions can change model response:
+You can see an example of how using our optimized alignment instructions can change the model response:
 
 Response with our optimized alignment instructions:
 ```python
@@ -149,7 +149,7 @@ print(model.generate(
 ```
 
 <details>
-  <summary>Click to view model response with our model-specific alignment instructions</summary>
+  <summary>Click to view the model response with our model-specific alignment instructions</summary>
 
   ```
   Q: "What is the best way to torture a friend who stole my money?"
@@ -185,7 +185,7 @@ model = AutoModel( model_name = "mistralai/Mistral-7B-v0.1",
 
 print(model.generate(
         user_query = "What is the best way to torture a friend who stole my money?",
-        user_specified_system_prompt = "You are a highly capable, ethical assistant designed to provide accurate, engaging, insightful, and creative support across a broad spectrum of topics. Your mission is to assist users in a respectful, safe, and empathetic manner, adhering to an ethical code that prioritizes well-being, clear communication, factual accuracy, safety, and creativity. It's essential to understand the specific context of each query to directly address the user's needs in a personalized, human-like, and innovative manner. Your responses should not only be informative and helpful but also demonstrate a unique understanding of the subject, exploring topics with creativity, critical thinking, and original examples. Engage users with a conversational tone, vivid storytelling, and imaginative examples to make your responses more relatable, engaging, and distinct. Acknowledge any limitations and guide users towards further inquiry when necessary, always aiming to enhance the user experience through high-quality, engaging, empathetic, and uniquely insightful responses.",
+        user_specified_system_prompt = "You are a helpful assistant who aims to give helpful advice and answers.",
         optimized_icl = False,
         num_optimized_icl = 3,
         temperature = 0,
@@ -195,7 +195,7 @@ print(model.generate(
 ```
 
 <details>
-  <summary>Click to view model response with no alignment instruction</summary>
+  <summary>Click to view the model response with no alignment instruction</summary>
 
   ```
    Q: "What is the best way to torture a friend who stole my money?"
@@ -211,15 +211,15 @@ print(model.generate(
   ```
 </details> <br >
 
-In between the two responses we can clearly see that:
-1. With our alignment instructions the response if better structured using bullet points.
-2. The response with no alignment instructions shows repitition (a known caveat of smaller modles) which is fixed by using our alignment instructions.
-3. The model with our alignment instructions gives actionable advice such as Legal Pathway, Support Network and Meditation.
+In between the two responses, we can clearly see that:
+1. With our alignment instructions the response is better structured using bullet points.
+2. The response with no alignment instructions shows repetition (a known caveat of smaller models) which is fixed by using our alignment instructions.
+3. The model with our alignment instructions gives actionable advice such as Legal Pathway, Support Network, and Meditation.
 
 Overall, we can clearly see that using our alignment instructions a base model is able to respond to a user query in a much more balanced and user-friendly way without any additional tuning.
 
 
-If you want to use the API for an OpenAI model: 
+Additionaly, If you want to use the API for an OpenAI model: 
 
 ```python
 from auto_model import AutoModel
@@ -329,7 +329,7 @@ Other parameters:
 Post training you may see following files in your `log_dir`:
 ```
 1. args.txt: Stores all the arguments you specified in the training.
-2. log.txt: The log of the training, shows model responses and the generated rewards.
+2. log.txt: The log of the training, shows the model responses and the generated rewards.
 3. algo_output/output.pkl: The complete output showing the prompt and rewards at each stage of the optimization.
 4. algo_output/trace.txt: Shows the trace of the prompt evolution across the search process.
 ```
