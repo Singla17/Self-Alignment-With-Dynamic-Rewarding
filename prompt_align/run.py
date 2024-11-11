@@ -227,6 +227,7 @@ def main(
     k = 2,
     cuda_visible_devices = "0",
     num_gpus = 1,
+    gpu_memory_utilization = 0.5,
     **kwargs
 ):
      
@@ -258,6 +259,7 @@ def main(
     - k (int): Parameter for the number of retrievals.
     - cuda_visible_devices (str): Specifies which CUDA devices to make visible.
     - num_gpus (int): Number of GPUs you want to use.
+    - gpu_memory_utilization (float): Maximum memory utilization of each GPU.
     - **kwargs: Additional keyword arguments
     """
 
@@ -292,7 +294,7 @@ def main(
     # load the models, if multiple models have the same name, we do not reload multiple times
 
     if base_model_family.lower() == 'mistral':
-        base_model = VLLMModel(model_name=base_model_name, download_dir=base_model_download_dir, gpu_memory_utilization=0.5, num_gpus=num_gpus)
+        base_model = VLLMModel(model_name=base_model_name, download_dir=base_model_download_dir, gpu_memory_utilization=gpu_memory_utilization, num_gpus=num_gpus)
     elif base_model_family.lower() == 'llama':
         is_awq = (base_model_name.split('-')[-1].lower() == 'awq')
         if is_awq:
@@ -305,7 +307,7 @@ def main(
                 download_dir= base_model_download_dir   
                 )
         else:
-            base_model = VLLMModel(model_name=base_model_name, download_dir=base_model_download_dir, gpu_memory_utilization=0.5, num_gpus=num_gpus)
+            base_model = VLLMModel(model_name=base_model_name, download_dir=base_model_download_dir, gpu_memory_utilization=gpu_memory_utilization, num_gpus=num_gpus)
     elif base_model_family.lower() == 'gpt':
         is_GPT = True
         base_model = OpenAIChatModel(model_name=base_model_name)

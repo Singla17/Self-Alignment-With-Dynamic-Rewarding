@@ -19,7 +19,7 @@ We provide three ways to leverage the advantages of DRPO, including both inferen
 ### Setup 
 
 To setup the environment, you may use the requirements.txt below (We use python 3.10):
-1. `pip install -r environment/requirements.txt`
+1. `pip install -r requirements.txt`
 
 ### API Keys/Access tokens
 
