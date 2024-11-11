@@ -1,20 +1,39 @@
+
+
 # Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models
 
-This is the repo for our EMNLP (Main) 2024 paper: Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models (DRPO).
+This is the official repo for our EMNLP (Main) 2024 paper: Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models (DRPO). DRPO is the first tuning-free inference-time algorithm to self-align large language models (LLMs) with human prepference. 
 
-## Setup 
+<p align="center">
+<img src="./images/DRPO_comparison_github.png" alt="Paradigm Comparison" width="700" title="Comparing DRPO with other LLM alignment paradigms."/>
+</p>
+
+
+## Usage
+
+We provide three ways to leverage the advantages of DRPO, including both inference and optimization code for easy adaption of DRPO in any downstream user scenarios. 
+* <a href='#get_prompt'>1. Accessing the Best Alignment Instructions</a>
+* <a href='#inference'>2. Model Inference with the Best Alignment Instructions</a>
+<a href='#optimize'>3. Training Alignment Instructions for Your Own Model</a>
+
+### Setup 
 
 To setup the environment, you may use any of the following two ways (We use python 3.10):
 1. `conda env create -f environment/conda_environment.yml`
 2. `pip install -r environment/requirements.txt`
 
-## API Keys/Access tokens
+### API Keys/Access tokens
 
 To use API based models/access restricted models, set-up the API Keys/access tokens as follows:
 1. OpenAI API Key: `export OPENAI_API_KEY=<your key>`
 2. Hugging Face Access Token: `export HF_TOKEN=<your token>`
 
-## Accessing optimized prompts
+<span id='get_prompt'/>
+
+
+## Accessing the Best Alignment Instructions
+
+The alignment instruction consists of two components, ...
 
 Note: For this code to be usable the `reasoners` folder should be in the working directory.
 
@@ -31,13 +50,14 @@ except:
     model_prompt = prompt_obj
 ```
 
-## Accessing optimized ICL examples
-
 ICL examples can be accessed at `data/ICL_examples.json`
 
 
+<span id='inference'/>
 
-## Inference with the optimized prompt
+## Model Inference with the Best Alignment Instructions
+
+
 Note: All the scripts have been tested on a single A100 GPU with 80GB memory. If the scripts fail on your GPU, it might be worth playing with `num_gpus` and `gpu_memory_utilization` parameters, these are as defined in the [vLLM API](https://github.com/vllm-project/vllm). 
 
 We show an example of how to use the `AutoModel` API for inference:
@@ -108,13 +128,17 @@ print(model.generate(
 ))
 ```
 
-## Training the optimized prompt for a model
+Key parameters ...
+
+<span id='optimize'/>
+
+## Training Alignment Instructions for Your Own Model
 
 To optimize the alignment prompt for `Mistral-7B` you may use the shell script and you can update the script as per your needs:
 
 `bash prompt_train.sh`
 
-All the parameters are explain as follows:
+Key parameters:
 
 ```
 - base_model_name (str): Name or path of the base model to be used.
