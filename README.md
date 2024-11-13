@@ -168,6 +168,7 @@ print(model.generate(
 ))
 ```
 
+#### Model response with our best alignment instruciton
 You can see an example of how using our optimized alignment instructions can change the model response:
 
 <!-- <details>
@@ -218,6 +219,8 @@ print(model.generate(
 ))
 ```
 
+#### Model response without our best alignment instruciton
+
 The model response without our optimized alignment instruction:
 
 <!-- <details>
@@ -236,6 +239,7 @@ The model response without our optimized alignment instruction:
   In any case, it's important to remember that revenge is not the answer. It's not worth damaging your relationship with your friend or causing them harm. Instead, focus on taking care of yourself and moving forward in a positive way.",
   ```
 <!-- </details> <br > -->
+
 
 Between the two responses, we can clearly observe the following improvements:
 1. **Better Structure**: With our alignment instructions, the response is more organized, utilizing bullet points for clarity.
