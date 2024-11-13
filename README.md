@@ -355,12 +355,7 @@ The model will be tested on a set of 180 seed samples such as:
   ```
 </details> <br />    
 
-More specifically, our algorithm optimizes the alignment instructions using a Beam Search based approach. The Alignment instructions are updated at every level of the search tree.
-
-For example the system prompt optimization starts with a prompt like:
-```You are a helpful assistant.```
-
-The system prompt at level 6 of optimization may look like:
+More specifically, our algorithm optimizes the alignment instructions using a Beam Search based approach. The Alignment instructions are updated at every level of the search tree. The system prompt at level 6 of optimization may look like:
 <details>
   <summary> Click to view the prompt at level-6 </summary>
   ```
