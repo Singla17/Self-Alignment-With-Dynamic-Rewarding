@@ -1,17 +1,32 @@
 
 
-# Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models
+# Dynamic Rewarding with Prompt Optimization (DRPO)
 
-This is the official repo for our EMNLP (Main) 2024 paper: Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models (DRPO). DRPO is the first tuning-free inference-time algorithm to self-align large language models (LLMs) with human preference. 
+This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models**,  a novel tuning-free inference-time algorithm to self-align large language models (LLMs) with human preference.
+
+## Introduction
+
+### Why we want tuning-free self-alignment?
 
 <p align="center">
-<img src="./images/DRPO_comparison_github.png" alt="Paradigm Comparison" width="700" title="Comparing DRPO with other LLM alignment paradigms."/>
+<img src="./images/DRPO_comparison_github.png" alt="Paradigm Comparison" width="500" title="Comparing DRPO with other LLM alignment paradigms."/>
 </p>
+
+
+
+### How DRPO works?
+
+
+<p align="center">
+<img src="./images/Dynamic_Rewarding_github.png" alt="Paradigm Comparison" width="500" title="DRPO framework with dynamic rewarding"/>
+</p>
+
+By integrating a dynamic rewarding mechanism with a search-based prompt optimization framework, DRPO allows LLMs to iteratively refine their alignment instructions and address alignment weaknesses without the need for costly fine-tuning or human supervision.
 
 
 ## Usage
 
-We provide three ways to leverage the advantages of DRPO, including both inference and optimization code for easy adaption of DRPO in any downstream user scenarios. 
+We provide three convenient ways to leverage the advantages of DRPO, including both inference and optimization code for easy adaption of DRPO in any downstream user scenarios. 
 * <a href='#get_prompt'>1. Accessing the Best Alignment Instructions</a>
 * <a href='#inference'>2. Model Inference with the Best Alignment Instructions</a>
 * <a href='#optimize'>3. Training Alignment Instructions for Your Own Model</a>
