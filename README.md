@@ -237,7 +237,7 @@ You can see an example of how using our optimized alignment instructions can cha
 #### Comparing with model response without optimized alignment instruction
 
 
-Instead, if we call the LLM normally with a norma instruction, such as `You are a helpful assistant who aims to give helpful advice and answers.`:
+Instead, if we call the LLM normally with a basic instruction, such as `You are a helpful assistant who aims to give helpful advice and answers.`:
 
 ```python
 from auto_model import AutoModel
