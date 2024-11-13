@@ -16,7 +16,7 @@ This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding w
 
 2. **Performance**: **Self-alignment** is crucial for maintaining and improving alignment performance. By leveraging a model's own reasoning and critique capabilities, self-alignment methods can dynamically address alignment weaknesses without relying on static, human-defined rules. This ensures more robust and adaptable performance across various scenarios. 
 
-DRPO combines the strengths of two recent demanding alignment paradigms—self-alignment and tuning-free alignment—offering a powerful framework for achieving superior alignment performance with minimal cost and maximum adaptability.
+DRPO combines the strengths of these two recent demanding alignment paradigms—self-alignment and tuning-free alignment—offering a powerful framework for achieving superior alignment performance with minimal cost and maximum adaptability.
 
 
 ### How DRPO works?
@@ -26,10 +26,10 @@ DRPO combines the strengths of two recent demanding alignment paradigms—self-a
 <img src="./images/Dynamic_Rewarding_github.png" alt="Paradigm Comparison" width="600" title="DRPO framework with dynamic rewarding"/>
 </p>
 
-By integrating a dynamic rewarding mechanism with a search-based prompt optimization framework, DRPO allows LLMs to iteratively refine their alignment instructions and address alignment weaknesses without the need for costly fine-tuning or human supervision.
 
-It is worth noting that DRPO is more prominent when applied to more recent and instruction-tuned LLMs which can better d
+DRPO is an **inference-time optimization method** that integrates a dynamic rewarding mechanism with a search-based prompt optimization framework. The **dynamic rewarding mechanism** enables the model to adapt to specific alignment challenges posed by different queries, effectively guiding the optimization process. This allows LLMs to iteratively refine their alignment instructions and address alignment weaknesses without the need for costly fine-tuning or human supervision.
 
+It is worth noting that DRPO’s effectiveness becomes even more pronounced when applied to recent, instruction-tuned LLMs, which are better equipped to handle nuanced prompts and alignment preferences.
 
 
 ## Usage
