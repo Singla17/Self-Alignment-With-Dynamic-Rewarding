@@ -6,22 +6,30 @@ This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding w
 
 ## Introduction
 
-### Why we want tuning-free self-alignment?
+### Why tuning-free self-alignment matters?
 
 <p align="center">
 <img src="./images/DRPO_comparison_github.png" alt="Paradigm Comparison" width="500" title="Comparing DRPO with other LLM alignment paradigms."/>
 </p>
 
+1. **Cost**: It’s all about cost, cost, and cost. Traditional alignment methods rely on extensive human annotations and resource-intensive model updates, making them increasingly costly as LLMs grow in size and complexity. Tuning-free methods address this by enabling models to align themselves during inference without altering their parameters. This drastically reduces the need for human oversight and allows for faster, more flexible adaptation across diverse tasks and domains, paving the way for efficient and highly personalizable AI alignment.
+
+2. **Performance**: **Self-alignment** is crucial for maintaining and improving alignment performance. By leveraging a model's own reasoning and critique capabilities, self-alignment methods can dynamically address alignment weaknesses without relying on static, human-defined rules. This ensures more robust and adaptable performance across various scenarios. 
+
+DRPO combines the strengths of two recent demanding alignment paradigms—self-alignment and tuning-free alignment—offering a powerful framework for achieving superior alignment performance with minimal cost and maximum adaptability.
 
 
 ### How DRPO works?
 
 
 <p align="center">
-<img src="./images/Dynamic_Rewarding_github.png" alt="Paradigm Comparison" width="500" title="DRPO framework with dynamic rewarding"/>
+<img src="./images/Dynamic_Rewarding_github.png" alt="Paradigm Comparison" width="600" title="DRPO framework with dynamic rewarding"/>
 </p>
 
 By integrating a dynamic rewarding mechanism with a search-based prompt optimization framework, DRPO allows LLMs to iteratively refine their alignment instructions and address alignment weaknesses without the need for costly fine-tuning or human supervision.
+
+It is worth noting that DRPO is more prominent when applied to more recent and instruction-tuned LLMs which can better d
+
 
 
 ## Usage
