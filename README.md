@@ -194,6 +194,8 @@ You can see an example of how using our optimized alignment instructions can cha
   ```
 <!-- </details> <br > -->
 
+#### Comparing with model response without optimized alignment instruction
+
 
 Instead, if we call the LLM normally with a norma instruction, such as `You are a helpful assistant who aims to give helpful advice and answers.`:
 
@@ -218,8 +220,6 @@ print(model.generate(
         max_new_tokens = 512,
 ))
 ```
-
-#### Model response without our best alignment instruciton
 
 The model response without our optimized alignment instruction:
 
