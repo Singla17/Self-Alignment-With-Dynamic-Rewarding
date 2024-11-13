@@ -59,18 +59,18 @@ To use API based models/access restricted models, set-up the API Keys/access tok
 <span id='get_prompt'/>
 
 
-## Accessing the Best Alignment Instructions
+## 1. Accessing the Best Alignment Instructions
 
-The alignment instruction consists of two components: Alignment Prompt and Alignment ICL examples
+The alignment instruction consists of two components: Alignment System Prompt and Alignment ICL examples
 
-To access the optimized prompts we have trained, you may use the following code snippet:
+To access the optimized system prompts we have trained, you may use the following code snippet:
 
 ```python
 with open(<path_to_prompt_file_txt_format>, 'rb') as f:
   model_prompt = f.read()
 ```
 
-The code stores the output in pkl format and you can access the optimized prompt from that using the code below:
+The code stores the output in `pkl` or `txt` format and you can access the optimized prompt from `data` folder using the code below.
 Note: for the code below the `reasoners` folder should be in the same directory.
 
 ```python
@@ -119,41 +119,17 @@ ICL examples can be accessed at `data/ICL_examples.json`
 
 <span id='inference'/>
 
-## Model Inference with the Best Alignment Instructions
+## 2. Model Inference with the Best Alignment Instructions
 
 Note: All the scripts have been tested on a single A100 GPU with 80GB memory. If the scripts fail on your GPU, it might be worth playing with `num_gpus` and `gpu_memory_utilization` parameters, these are as defined in the [vLLM API](https://github.com/vllm-project/vllm). 
 
-We show an example of how to use the `AutoModel` API for inference:
+We show an example of how to use the `AutoModel` API for inference. You can generate the model response using the `generate` function, normally as how you call `generate` function in Hugging Face. 
 
-The Key parameters for model initialization are explained as follows:
-
-```
-- model_name (str): The model name (as seen on HuggingFace) you want to use.
-- num_gpus (int): Number of GPUs you want to use for inference.
-- cuda_visible_devices (str): IDs of the GPUs you want to use.
-- gpu_memory_utilization (float): Maximum cap on GPU memory utilization of each individual GPU.
-- dtype (str): Data type of model parameters.
-```
-
-You can generate the model response using the `generate` function and the key parameters are defined as follows:
-
-```
-- user_query (str): The Query you want the model to respond to.
-- user_specified_system_prompt (str): If you want to test the model with a custom system prompt (using this means alignment optimized prompts won't be used)
-- optimized_prompt (bool): Boolean indicating if you want to use model specific optimized alignment prompt.
-- optimized_icl (bool): Boolean indicating if you want to use ICL examples optimized for alignment/
-- num_optimized_icl (int): Number of alignment ICL examples you want to use (can be an integer in [1, 5])
-```
-
-### Model response improvement with DRPO
-
-You can see an example of how using our optimized alignment instructions can change the model response:
-
-Response with our optimized alignment instructions:
 ```python
 from auto_model import AutoModel
 
-model = AutoModel( model_name = "mistralai/Mistral-7B-v0.1",
+model = AutoModel( 
+        model_name = "mistralai/Mistral-7B-v0.1",
         num_gpus = 1,
         cuda_visible_devices = "0",
         dtype = 'bfloat16',
@@ -170,6 +146,8 @@ print(model.generate(
         max_new_tokens = 512,
 ))
 ```
+
+You can see an example of how using our optimized alignment instructions can change the model response:
 
 <details>
   <summary>Click to view the model response with our model-specific alignment instructions</summary>
@@ -194,7 +172,8 @@ print(model.generate(
   ```
 </details> <br >
 
-Response with no alignment instructions:
+
+Instead, if Response with no alignment instructions:
 
 ```python
 from auto_model import AutoModel
@@ -263,9 +242,26 @@ print(model.generate(
 ))
 ```
 
+The key parameters for model initialization are explained as follows:
+
+- `model_name` (str): The model name (as seen on HuggingFace) you want to use.
+- `num_gpus` (int): Number of GPUs you want to use for inference.
+- `cuda_visible_devices` (str): IDs of the GPUs you want to use.
+- `gpu_memory_utilization` (float): Maximum cap on GPU memory utilization of each individual GPU.
+- `dtype` (str): Data type of model parameters.
+
+key parameters for `generate` function:
+
+- `user_query` (str): The Query you want the model to respond to.
+- `user_specified_system_prompt` (str): If you want to test the model with a custom system prompt (using this means alignment optimized prompts won't be used)
+- `optimized_prompt` (bool): Boolean indicating if you want to use model specific optimized alignment prompt.
+- `optimized_icl` (bool): Boolean indicating if you want to use ICL examples optimized for alignment/
+- `num_optimized_icl` (int): Number of alignment ICL examples you want to use (can be an integer in [1, 5])
+
+
 <span id='optimize'/>
 
-## Training Alignment Instructions for Your Own Model
+## 3. Training Alignment Instructions for Your Own Model
 
 ### Quick Start
 
