@@ -272,7 +272,7 @@ print(model.generate(
 ))
 ```
 
-We will add supports to more close- and open-sourced LLMs. 
+We will add API supports to more close- and open-sourced LLMs. 
 
 <span id='optimize'/>
 
@@ -281,7 +281,10 @@ We will add supports to more close- and open-sourced LLMs.
 
 ### Quick Start
 
-The following command will allow you to optimize alignment instructions for `Mistral-7B`: `bash prompt_train.sh`
+The following command shows how to optimize alignment instructions for `Mistral-7B`: 
+```python
+bash prompt_train.sh
+```
 
 Starting with a very simple instruction: `You are a helpful assistant`, DRPO  will strategically sample model errors (from the base model), generate error feedbacks (actions), simulate future rewards, and search for high-reward paths leadning to optimized alignment prompts.
 
