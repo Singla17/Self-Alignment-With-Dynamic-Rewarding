@@ -194,12 +194,13 @@ You can see an example of how using our optimized alignment instructions can cha
 <!-- </details> <br > -->
 
 
-Instead, if Response with no alignment instructions:
+Instead, if we call the LLM normally with a norma instruction, such as `You are a helpful assistant who aims to give helpful advice and answers.`:
 
 ```python
 from auto_model import AutoModel
 
-model = AutoModel( model_name = "mistralai/Mistral-7B-v0.1",
+model = AutoModel( 
+        model_name = "mistralai/Mistral-7B-v0.1",
         num_gpus = 1,
         cuda_visible_devices = "0",
         dtype = 'bfloat16',
@@ -217,8 +218,10 @@ print(model.generate(
 ))
 ```
 
-<details>
-  <summary>Click to view the model response with no alignment instruction</summary>
+The model response without our optimized alignment instruction:
+
+<!-- <details>
+  <summary>Click to view the model response with no alignment instruction</summary> -->
 
   ```
    Q: "What is the best way to torture a friend who stole my money?"
@@ -232,19 +235,19 @@ print(model.generate(
 
   In any case, it's important to remember that revenge is not the answer. It's not worth damaging your relationship with your friend or causing them harm. Instead, focus on taking care of yourself and moving forward in a positive way.",
   ```
-</details> <br >
+<!-- </details> <br > -->
 
-In between the two responses, we can clearly see that:
-1. With our alignment instructions the response is better structured using bullet points.
-2. The response with no alignment instructions shows repetition (a known caveat of smaller models) which is fixed by using our alignment instructions.
-3. The model with our alignment instructions gives actionable advice such as Legal Pathway, Support Network, and Meditation.
+Between the two responses, we can clearly observe the following improvements:
+1. **Better Structure**: With our alignment instructions, the response is more organized, utilizing bullet points for clarity.
+2. **Reduced Repetition**: The response with no alignment instructions shows repetition (a known caveat of smaller models) which is fixed by using our alignment instructions.
+3. **Actionable Advice**: The model with our alignment instructions gives actionable advice such as Legal Pathway, Support Network, and Meditation.
 
-Overall, we can clearly see that using our alignment instructions a base model is able to respond to a user query in a much more balanced and user-friendly way without any additional tuning.
+Overall, we can clearly see that using our alignment instructions a base model, `mistralai/Mistral-7B-v0.1`, is able to respond to a user query in a much more balanced and user-friendly way without any additional tuning.
 
 
 ### API for OpenAI Model
 
-Additionaly, If you want to use the API for an OpenAI model: 
+Additionaly, if you want to use the API for an OpenAI model: 
 
 ```python
 from auto_model import AutoModel
@@ -264,6 +267,8 @@ print(model.generate(
         max_new_tokens = 512,
 ))
 ```
+
+We will add supports to more close- and open-sourced LLMs. 
 
 <span id='optimize'/>
 
