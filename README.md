@@ -345,11 +345,11 @@ The system prompt at level 6 of optimization may look like:
 The instructions will keep evolving as the search process gets deeper and deeper, the complete evolution of the instruction can be seen in the trace file.
 
 Some imporant search parameters are: 
-```
-- n_actions (int): Number of actions to be sampled for every node in the beam search.
-- depth (int): Initial search depth for exploration.
-- beam_size (int): Number of beams for beam search.
-```
+
+- `n_actions` (int): Number of actions to be sampled for every node in the beam search.
+- `depth` (int): Initial search depth for exploration.
+- `beam_size` (int): Number of beams for beam search.
+
 
 The parameters `n_actions` and `beam_size` control the nodes (i.e. the alignment instructions) which make it to the next level of the search process and finally we terminate our search process once we hit the specified search depth.
 
@@ -360,42 +360,42 @@ To optimize the alignment prompt for `Mistral-7B` you may use the shell script a
 `bash prompt_train.sh`
 
 Key parameters (requires user review):
-```
-- base_model_name (str): Name or path of the base model to be used.
-- base_model_family (str): Family name of the base model, e.g., 'mistral'.
-- eval_model_name (str): Model name for evaluation purposes, e.g., 'gpt-4-0125-preview'.
-- metrics_model_name (str): Model name for dynamic reward selection.
-- optimize_model_name (str): Model name used for optimization tasks.
-- initial_system_prompt (str): Initial system prompt for the model.
-- temperature (float): Temperature for controlling randomness in model predictions.
-```
+
+- `base_model_name` (str): Name or path of the base model to be used.
+- `base_model_family` (str): Family name of the base model, e.g., 'mistral'.
+- `eval_model_name` (str): Model name for evaluation purposes, e.g., 'gpt-4-0125-preview'.
+- `metrics_model_name` (str): Model name for dynamic reward selection.
+- `optimize_model_name` (str): Model name used for optimization tasks.
+- `initial_system_prompt` (str): Initial system prompt for the model.
+- `temperature` (float): Temperature for controlling randomness in model predictions.
+
 
 Other parameters:
 
-```
-- max_depth_increase (int): Maximum increment allowed in search depth. (Used when the original training samples are of low difficulty)
-- log_dir (Optional[str]): Directory path for storing logs.
-- disable_log (bool): If True, disables logging.
-- disable_tqdm (bool): If True, disables tqdm progress bars.
-- base_model_download_dir (str): Directory for downloading base model files.
-- data_dir (str): Directory path for data files.
-- metrics_cache_path (str): File path to cache evaluation metrics.
-- num_training_examples (int): Number of examples to use for training.
-- logging_level (str): Logging level, e.g., "INFO" or "DEBUG".
-- ret_icl (bool): If True, then prompt is optimized with retreival based ICL.
-- is_GPT (bool): If True, treats the model as a GPT model.
-- k (int): Parameter for the number of retrievals.
-- cuda_visible_devices (str): Specifies which CUDA devices to make visible
-- num_gpus (int): Number of GPUs you want to use
-```
+
+- `max_depth_increase` (int): Maximum increment allowed in search depth. (Used when the original training samples are of low difficulty)
+- `log_dir` (Optional[str]): Directory path for storing logs.
+- `disable_log` (bool): If True, disables logging.
+- `disable_tqdm` (bool): If True, disables tqdm progress bars.
+- `base_model_download_dir` (str): Directory for downloading base model files.
+- `data_dir` (str): Directory path for data files.
+- `metrics_cache_path` (str): File path to cache evaluation metrics.
+- `num_training_examples` (int): Number of examples to use for training.
+- `logging_level` (str): Logging level, e.g., "INFO" or "DEBUG".
+- `ret_icl` (bool): If True, then prompt is optimized with retreival based ICL.
+- `is_GPT` (bool): If True, treats the model as a GPT model.
+- `k` (int): Parameter for the number of retrievals.
+- `cuda_visible_devices` (str): Specifies which CUDA devices to make visible
+- `num_gpus` (int): Number of GPUs you want to use
+
 
 Post training you may see following files in your `log_dir`:
-```
-1. args.txt: Stores all the arguments you specified in the training.
-2. log.txt: The log of the training, shows the model responses and the generated rewards.
-3. algo_output/output.pkl: The complete output showing the prompt and rewards at each stage of the optimization.
-4. algo_output/trace.txt: Shows the trace of the prompt evolution across the search process.
-```
+
+1. `args.txt`: Stores all the arguments you specified in the training.
+2. `log.txt`: The log of the training, shows the model responses and the generated rewards.
+3. `algo_output/output.pkl`: The complete output showing the prompt and rewards at each stage of the optimization.
+4. `algo_output/trace.txt`: Shows the trace of the prompt evolution across the search process.
+
 
 ## Citations
 
