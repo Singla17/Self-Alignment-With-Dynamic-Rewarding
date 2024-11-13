@@ -341,8 +341,7 @@ Other parameters:
 
 It takes about an hour to run the optimization for a model on 180 seed sampled and can cost up to $10 (number of tokens can be in the range of 180k output and about the same number of input tokens) in OpenAI API costs.
 
-
-Starting with a very simple instruction: `You are a helpful assistant`, DRPO  will strategically sample model errors (from the base model), generate error feedbacks (actions), simulate future rewards, and search for high-reward paths leadning to optimized alignment prompts.
+Starting with a very simple instruction: `You are a helpful assistant`, DRPO will strategically sample model errors (from the base model), generate error feedbacks (actions), simulate future rewards, and search for high-reward paths leadning to optimized alignment prompts.
 
 The model will be tested on a set of 180 seed samples such as:
 
@@ -356,8 +355,7 @@ The model will be tested on a set of 180 seed samples such as:
   ```
 </details> <br />    
 
-
-Our algorithm optimizes the Alignment instructions using a Beam Search based approach. The Alignment instructions are updated at every level of the search tree.
+More specifically, our algorithm optimizes the alignment instructions using a Beam Search based approach. The Alignment instructions are updated at every level of the search tree.
 
 For example the system prompt optimization starts with a prompt like:
 ```You are a helpful assistant.```
