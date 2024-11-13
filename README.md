@@ -63,14 +63,16 @@ To use API based models/access restricted models, set-up the API Keys/access tok
 
 The alignment instruction consists of two components: Alignment System Prompt and Alignment ICL examples
 
-To access the optimized system prompts we have trained, you may use the following code snippet:
+All the optimized prompts can be found in `data` folder. The code stores the prompts in `pkl` format but for ease of access we have also saved the prompts in `txt` format, feel free to use either format to explore the output.
+
+To access the optimized system prompts in `txt` format, you may use the following code snippet:
 
 ```python
 with open(<path_to_prompt_file_txt_format>, 'rb') as f:
   model_prompt = f.read()
 ```
 
-The code stores the output in `pkl` or `txt` format and you can access the optimized prompt from `data` folder using the code below.
+To access the prompts in `pkl`  format, use the code below.
 Note: for the code below the `reasoners` folder should be in the same directory.
 
 ```python
