@@ -282,6 +282,38 @@ The final optimized alignment instruction for Mistral-7B can look something like
 
 It takes about an hour to run the optimization for a model on 180 seed sampled and can cost up to $10 (number of tokens can be in the range of 180k output and about the same number of input tokens) in OpenAI API costs.
 
+### Tree Search Optimization
+
+Our algorithm optimizes the Alignment instructions using a Beam Search based approach. The Alignment instructions are updated at every level of the search tree.
+
+For example the system prompt optimization starts with a prompt like:
+```You are a helpful assistant.```
+
+The system prompt at level 6 of optimization may look like:
+<details>
+  <summary> Click to view the prompt at level-6 </summary>
+  ```
+  As a helpful and ethical assistant, you are tasked with providing responses that are not only accurate and safe but also engaging and empathetic across a wide range of queries. Your responses should prioritize the well-being of individuals and the community, adhering to ethical standards and promoting positive interactions. It is crucial to balance factual accuracy with engaging storytelling, critical thinking, and a respectful tone to make your assistance as valuable and enjoyable as possible. In doing so, remember to:
+  - Refuse to engage in or provide information on unethical, illegal, or harmful activities, gently guiding users towards understanding the potential consequences of such actions and offering constructive alternatives.
+  - Acknowledge your limitations, including no access to real-time data or the internet and the inability to take physical actions, being clear about these boundaries to manage user expectations.
+  - Verify the accuracy of your information, especially when addressing technical or complex topics, and guide users towards additional resources for further learning or up-to-date information.
+  - Strive to understand and address the underlying concerns or emotional states of users, using natural language and expressing empathy to make interactions more relatable and engaging.
+  - Incorporate storytelling elements where appropriate, and avoid sounding robotic by using varied sentence structures and a conversational tone, aiming for clarity and conciseness to keep the user engaged.
+  - Encourage critical thinking by exploring different perspectives and providing nuanced analyses that consider multiple facets of a query, acknowledging when a topic might benefit from further user research or consultation with specialized resources.
+  - When faced with requests that go against ethical guidelines, explain your refusal clearly and offer to help in a way that aligns with promoting safety, understanding, and positive outcomes.
+  ```
+</details> <br \>
+
+The instructions will keep evolving as the search process gets deeper and deeper, the complete evolution of the instruction can be seen in the trace file.
+
+Some imporant search parameters are: 
+```
+- n_actions (int): Number of actions to be sampled for every node in the beam search.
+- depth (int): Initial search depth for exploration.
+- beam_size (int): Number of beams for beam search.
+```
+
+The parameters `n_actions` and `beam_size` control the nodes (i.e. the alignment instructions) which make it to the next level of the search process and finally we terminate our search process once we hit the specified search depth.
 
 ### Training Alignment Instructions
 
@@ -297,14 +329,7 @@ Key parameters (requires user review):
 - metrics_model_name (str): Model name for dynamic reward selection.
 - optimize_model_name (str): Model name used for optimization tasks.
 - initial_system_prompt (str): Initial system prompt for the model.
-```
-
-Key Search algorithm parameters:
-```
-- n_actions (int): Number of actions to be sampled in the beam search.
 - temperature (float): Temperature for controlling randomness in model predictions.
-- depth (int): Initial search depth for exploration.
-- beam_size (int): Number of beams for beam search.
 ```
 
 Other parameters:
