@@ -283,7 +283,8 @@ We will add API supports to more close- and open-sourced LLMs.
 
 ### Quick Start
 
-The following command shows how to optimize alignment instructions for `Mistral-7B`: 
+We present a command example to show how to optimize alignment instructions for `Mistral-7B`:
+
 ```python
 bash prompt_train.sh
 ```
