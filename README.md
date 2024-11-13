@@ -63,13 +63,30 @@ To use API based models/access restricted models, set-up the API Keys/access tok
 
 The alignment instruction consists of two components: Alignment System Prompt and Alignment ICL examples
 
-All the optimized prompts can be found in `data` folder. The code stores the prompts in `pkl` format but for ease of access we have also saved the prompts in `txt` format, feel free to use either format to explore the output.
+All the optimized prompts can be found in `data` folder. The code stores the prompts in `pkl` format but for ease of access we have also saved the prompts in `txt`, `json` format, feel free to use either format to explore the output.
 
 To access the optimized system prompts in `txt` format, you may use the following code snippet:
 
 ```python
 with open(<path_to_prompt_file_txt_format>, 'rb') as f:
   model_prompt = f.read()
+```
+
+The `json` is formatted as follows: 
+```python
+{
+  'level i': {
+      'Prompt': <Optimized System Prompt at the Level>
+      'Evaluation of the prompt': <Dict showing dynamic reward based evaluation>
+  }
+}
+```
+To access the prompts in `json` format use the code below:
+
+```python
+import json
+
+model_prompt = json.load(open(<path_to_json_file>))[<level number>]['Prompt']
 ```
 
 To access the prompts in `pkl`  format, use the code below.
@@ -85,6 +102,27 @@ try:
     model_prompt = prompt_obj.terminal_node.state[-1].system_prompt
 except:
     model_prompt = prompt_obj
+```
+
+If you want to convert the pkl code output into json, please use this function below: 
+```python
+import json
+
+def convert_pkl_to_json(prompt_obj, file_name):
+
+    json_object = {}
+
+    for i in range(len(prompt_obj.trace[-1][1])):
+        current_prompt = prompt_obj.trace[-1][1][i].system_prompt
+        eval_dict = prompt_obj.trace[-1][1][i].eval_dict
+
+        json_object['level {}'.format(i+1)] = {
+            "Prompt": current_prompt,
+            "Evaluation of the prompt": eval_dict
+        }
+
+    with open(file_name, "w") as outfile: 
+        json.dump(json_object, outfile)
 ```
 
 <details>
