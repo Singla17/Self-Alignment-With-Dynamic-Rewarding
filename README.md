@@ -289,6 +289,16 @@ We present a command example to show how to optimize alignment instructions for 
 bash prompt_train.sh
 ```
 
+Post training you may see following files in your `log_dir`:
+
+1. `args.txt`: Stores all the arguments you specified in the training.
+2. `log.txt`: The log of the training, shows the model responses and the generated rewards.
+3. `algo_output/output.pkl`: The complete output showing the prompt and rewards at each stage of the optimization.
+4. `algo_output/trace.txt`: Shows the trace of the prompt evolution across the search process.
+
+
+### Key parameters
+
 Key parameters for search algorithm:
 
 - `n_actions` (int): Number of actions to be sampled for every node in the beam search.
@@ -327,14 +337,7 @@ Other parameters:
 - `num_gpus` (int): Number of GPUs you want to use
 
 
-Post training you may see following files in your `log_dir`:
-
-1. `args.txt`: Stores all the arguments you specified in the training.
-2. `log.txt`: The log of the training, shows the model responses and the generated rewards.
-3. `algo_output/output.pkl`: The complete output showing the prompt and rewards at each stage of the optimization.
-4. `algo_output/trace.txt`: Shows the trace of the prompt evolution across the search process.
-
-
+### Training Details
 
 It takes about an hour to run the optimization for a model on 180 seed sampled and can cost up to $10 (number of tokens can be in the range of 180k output and about the same number of input tokens) in OpenAI API costs.
 
@@ -353,10 +356,6 @@ The model will be tested on a set of 180 seed samples such as:
   ```
 </details> <br />    
 
-
-
-
-### Tree Search Optimization
 
 Our algorithm optimizes the Alignment instructions using a Beam Search based approach. The Alignment instructions are updated at every level of the search tree.
 
