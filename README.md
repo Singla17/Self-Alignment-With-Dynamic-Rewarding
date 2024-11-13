@@ -125,6 +125,27 @@ Note: All the scripts have been tested on a single A100 GPU with 80GB memory. If
 
 We show an example of how to use the `AutoModel` API for inference. You can generate the model response using the `generate` function, normally as how you call `generate` function in Hugging Face. 
 
+### Key Parameters
+
+The key parameters for model initialization are explained as follows:
+
+- `model_name` (str): The model name (as seen on HuggingFace) you want to use.
+- `num_gpus` (int): Number of GPUs you want to use for inference.
+- `cuda_visible_devices` (str): IDs of the GPUs you want to use.
+- `gpu_memory_utilization` (float): Maximum cap on GPU memory utilization of each individual GPU.
+- `dtype` (str): Data type of model parameters.
+
+Key parameters for `generate` function:
+
+- `user_query` (str): The Query you want the model to respond to.
+- `user_specified_system_prompt` (str): If you want to test the model with a custom system prompt (using this means alignment optimized prompts won't be used)
+- `optimized_prompt` (bool): Boolean indicating if you want to use model specific optimized alignment prompt.
+- `optimized_icl` (bool): Boolean indicating if you want to use ICL examples optimized for alignment/
+- `num_optimized_icl` (int): Number of alignment ICL examples you want to use (can be an integer in [1, 5])
+
+
+### Code Examples 
+
 ```python
 from auto_model import AutoModel
 
@@ -149,8 +170,8 @@ print(model.generate(
 
 You can see an example of how using our optimized alignment instructions can change the model response:
 
-<details>
-  <summary>Click to view the model response with our model-specific alignment instructions</summary>
+<!-- <details>
+  <summary>Click to view the model response with our model-specific alignment instructions</summary> -->
 
   ```
   Q: "What is the best way to torture a friend who stole my money?"
@@ -170,7 +191,7 @@ You can see an example of how using our optimized alignment instructions can cha
 
   By focusing on these steps, you're prioritizing a resolution that is both legal and ethical, ensuring that you're taking care of your emotional health while seeking justice. Remember, the choices you make now can have a lasting impact on your personal growth and future relationships.",
   ```
-</details> <br >
+<!-- </details> <br > -->
 
 
 Instead, if Response with no alignment instructions:
@@ -221,6 +242,8 @@ In between the two responses, we can clearly see that:
 Overall, we can clearly see that using our alignment instructions a base model is able to respond to a user query in a much more balanced and user-friendly way without any additional tuning.
 
 
+### API for OpenAI Model
+
 Additionaly, If you want to use the API for an OpenAI model: 
 
 ```python
@@ -242,24 +265,8 @@ print(model.generate(
 ))
 ```
 
-The key parameters for model initialization are explained as follows:
-
-- `model_name` (str): The model name (as seen on HuggingFace) you want to use.
-- `num_gpus` (int): Number of GPUs you want to use for inference.
-- `cuda_visible_devices` (str): IDs of the GPUs you want to use.
-- `gpu_memory_utilization` (float): Maximum cap on GPU memory utilization of each individual GPU.
-- `dtype` (str): Data type of model parameters.
-
-key parameters for `generate` function:
-
-- `user_query` (str): The Query you want the model to respond to.
-- `user_specified_system_prompt` (str): If you want to test the model with a custom system prompt (using this means alignment optimized prompts won't be used)
-- `optimized_prompt` (bool): Boolean indicating if you want to use model specific optimized alignment prompt.
-- `optimized_icl` (bool): Boolean indicating if you want to use ICL examples optimized for alignment/
-- `num_optimized_icl` (int): Number of alignment ICL examples you want to use (can be an integer in [1, 5])
-
-
 <span id='optimize'/>
+
 
 ## 3. Training Alignment Instructions for Your Own Model
 
