@@ -11,8 +11,6 @@
 </p>
 
 
-This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models**,  a novel tuning-free inference-time algorithm to self-align large language models (LLMs) with human preference.
-
 ## News
 
 - **November 13, 2024**: DRPO is now supported by the [LLM Reasoners](https://github.com/maitrix-org/llm-reasoners)! Explore the adapted DRPO implementation and a host of additional features in the excellent LLM Reasoners library: [Link](https://github.com/maitrix-org/llm-reasoners/tree/main/examples/DRPO)
@@ -22,17 +20,23 @@ This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding w
 
 ## Introduction
 
+This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models**,  a novel tuning-free inference-time algorithm to self-align large language models (LLMs) with human preference.
+
 ### Why tuning-free self-alignment matters?
 
 <p align="center">
 <img src="./images/DRPO_comparison_github.png" alt="Paradigm Comparison" width="500" title="Comparing DRPO with other LLM alignment paradigms."/>
 </p>
 
-1. **Cost**: It’s all about cost, cost, and cost. Traditional alignment methods rely on extensive human annotations and resource-intensive model updates, making them increasingly costly as LLMs grow in size and complexity. Tuning-free methods address this by enabling models to align themselves during inference without altering their parameters. This drastically reduces the need for human oversight and allows for faster, more flexible adaptation across diverse tasks and domains, paving the way for efficient and highly personalizable AI alignment.
 
-2. **Performance**: **Self-alignment** is crucial for maintaining and improving alignment performance. By leveraging a model's own reasoning and critique capabilities, self-alignment methods can dynamically address alignment weaknesses without relying on static, human-defined rules. This ensures more robust and adaptable performance across various scenarios. 
+1. **Cost-Efficiency**: It’s all about cost, cost, and cost. Traditional alignment methods depend on costly human annotations and resource-intensive updates, which scale poorly with larger LLMs. DRPO leverages **tuning-free alignment**, enabling models to be aligned during inference without parameter updates. This significantly lowers costs, speeds up adaptation, and enables **flexible, highly personalized AI systems**.
+
+2. **Performance**: DRPO integrates **self-alignment**, utilizing the model’s own reasoning and critique capabilities to **address model-specific alignment weaknesses** dynamically, without static, human-defined rules. This ensures robust, adaptable performance across diverse tasks and domains.
 
 DRPO combines the strengths of these two recent demanding alignment paradigms—self-alignment and tuning-free alignment—offering a powerful framework for achieving superior alignment performance with minimal cost and maximum adaptability.
+
+3. **Last-mile Solution**: DRPO is compatible with other tuning-based alignment approach—use it to boost your LLM's alignment performance as the final step after training your LLM, with minimal alignment cost.
+
 
 
 ### How DRPO works?
