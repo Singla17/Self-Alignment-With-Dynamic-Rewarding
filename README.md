@@ -11,9 +11,14 @@
 </p>
 
 
-# Dynamic Rewarding with Prompt Optimization (DRPO)
-
 This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models**,  a novel tuning-free inference-time algorithm to self-align large language models (LLMs) with human preference.
+
+## News
+
+- Nov. 13, 2024: DRPO was supported by the [LLM Reasoners](https://github.com/maitrix-org/llm-reasoners) library! Check the adpted DRPO and many additional features in the great LLM Reasoners!
+- Nov. 10, 2024: Official codebase was released for easy adaption and usage. 
+- Sept. 20, 2024: DRPO paper was accepted by EMNLP 2024 (Main)!
+
 
 ## Introduction
 
