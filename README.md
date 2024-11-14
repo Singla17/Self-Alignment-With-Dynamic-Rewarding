@@ -4,6 +4,12 @@
 <img src="./images/DRPO_logo_v3.png" alt="Logo" width="300" title="DRPO Logo"/>
 </p>
 
+<p align="center">
+  [<a href="https://github.com/Singla17/dynamic-alignment-optimization?tab=readme-ov-file#introduction">Introduction</a>]
+  [<a href="https://arxiv.org/abs/2411.08733">Paper (EMNLP2024)</a>]
+  [<a href="https://github.com/Singla17/dynamic-alignment-optimization?tab=readme-ov-file#usage">Getting Started</a>]
+</p>
+
 
 # Dynamic Rewarding with Prompt Optimization (DRPO)
 
