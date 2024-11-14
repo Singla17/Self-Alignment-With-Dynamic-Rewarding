@@ -28,12 +28,11 @@ This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding w
 <img src="./images/DRPO_comparison_github.png" alt="Paradigm Comparison" width="500" title="Comparing DRPO with other LLM alignment paradigms."/>
 </p>
 
+DRPO combines the strengths of two recent demanding alignment paradigms—**self-alignment and tuning-free alignment**—offering a powerful framework for achieving superior alignment performance with minimal cost and maximum adaptability.
 
 1. **Cost-Efficiency**: It’s all about cost, cost, and cost. Traditional alignment methods depend on costly human annotations and resource-intensive updates, which scale poorly with larger LLMs. DRPO leverages **tuning-free alignment**, enabling models to be aligned during inference without parameter updates. This significantly lowers costs, speeds up adaptation, and enables **flexible, highly personalized AI systems**.
 
 2. **Performance**: DRPO integrates **self-alignment**, utilizing the model’s own reasoning and critique capabilities to **address model-specific alignment weaknesses** dynamically, without static, human-defined rules. This ensures robust, adaptable performance across diverse tasks and domains.
-
-DRPO combines the strengths of these two recent demanding alignment paradigms—self-alignment and tuning-free alignment—offering a powerful framework for achieving superior alignment performance with minimal cost and maximum adaptability.
 
 3. **Last-mile Solution**: DRPO is compatible with other tuning-based alignment approach—use it to boost your LLM's alignment performance as the final step after training your LLM, with minimal alignment cost.
 
@@ -47,7 +46,7 @@ DRPO combines the strengths of these two recent demanding alignment paradigms—
 </p>
 
 
-DRPO is an **inference-time optimization method** that integrates a dynamic rewarding mechanism with a search-based prompt optimization framework. The **dynamic rewarding mechanism** enables the model to adapt to specific alignment challenges posed by different queries, effectively guiding the optimization process. This allows LLMs to iteratively refine their alignment instructions and address alignment weaknesses without the need for costly fine-tuning or human supervision.
+DRPO is an **inference-time optimization** method that integrates a **dynamic rewarding mechanism** with a **search-based prompt optimization framework**. The dynamic rewarding mechanism enables the model to adapt to model-specific alignment challenges posed by various queries, effectively guiding the optimization process. This allows LLMs to iteratively refine their alignment instructions, addressing their own alignment weaknesses without the need for costly fine-tuning or human intervention.
 
 It is worth noting that DRPO’s effectiveness becomes even more pronounced when applied to recent, instruction-tuned LLMs, which are better equipped to handle nuanced prompts and alignment preferences.
 
