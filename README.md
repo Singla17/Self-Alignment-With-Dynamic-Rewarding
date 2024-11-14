@@ -1,5 +1,10 @@
 
 
+<p align="center">
+<img src="./images/DRPO_logo_v3.png" alt="Logo" width="300" title="DRPO Logo"/>
+</p>
+
+
 # Dynamic Rewarding with Prompt Optimization (DRPO)
 
 This is the official repo for our EMNLP (Main) 2024 paper: **Dynamic Rewarding with Prompt Optimization Enables Tuning-free Self-Alignment of Language Models**,  a novel tuning-free inference-time algorithm to self-align large language models (LLMs) with human preference.
