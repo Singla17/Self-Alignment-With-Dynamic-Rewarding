@@ -13,7 +13,7 @@
 
 ## News
 
-- **November 13, 2024**: DRPO is now supported by the [LLM Reasoners](https://github.com/maitrix-org/llm-reasoners)! Explore the adapted DRPO implementation and a host of additional features in the excellent LLM Reasoners library: [Link](https://github.com/maitrix-org/llm-reasoners/tree/main/examples/DRPO)
+- **November 13, 2024**: DRPO is now supported by the [LLM Reasoners](https://github.com/maitrix-org/llm-reasoners)! Explore the adapted DRPO implementation and a host of additional features in the great LLM Reasoners library: [Link](https://github.com/maitrix-org/llm-reasoners/tree/main/examples/DRPO)
 - **November 10, 2024**: The official DRPO codebase has been released, making it easier to adapt and use.
 - **September 20, 2024**: The DRPO paper was accepted to EMNLP 2024 (Main)!
 
