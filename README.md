@@ -310,7 +310,7 @@ Overall, we can clearly see that using our alignment instructions a base model, 
 
 ### API for OpenAI Model
 
-Additionaly, if you want to use the API for an OpenAI model: 
+Additionally, if you want to use the API for an OpenAI model: 
 
 ```python
 from auto_model import AutoModel
